@@ -11,6 +11,7 @@ const manifest = JSON.parse(fs.readFileSync(path.join(MIRROR, 'manifest.json'), 
 const port = Number(process.env.PORT || process.argv[2] || 4187);
 const contactAttempts = new Map();
 const allowedServices = new Set(['strategy', 'content', 'production', 'social', 'campaign', 'other']);
+const allowedRequestTypes = new Set(['project', 'audit', 'meeting']);
 const phoneCountries = {
   QA: { code: '+974', min: 8, max: 8 },
   AE: { code: '+971', min: 9, max: 9 },
@@ -109,6 +110,7 @@ async function deliverContact(submission) {
       subject: `New Trendy enquiry from ${submission.name}`,
       text: [
         `Name: ${submission.name}`,
+        `Request: ${submission.requestType}`,
         `Email: ${submission.email}`,
         `Phone: ${submission.phoneCountry} ${phoneCountries[submission.phoneCountry]?.code || ''} ${submission.phone}`,
         `Company: ${submission.company || 'Not provided'}`,
@@ -141,6 +143,7 @@ async function handleContact(req, res) {
     }
 
     const submission = {
+      requestType: cleanLine(body.requestType, 20),
       name: cleanLine(body.name, 100),
       email: cleanLine(body.email, 160).toLowerCase(),
       phoneCountry: cleanLine(body.phoneCountry, 2).toUpperCase(),
@@ -154,7 +157,7 @@ async function handleContact(req, res) {
     const phoneConfig = phoneCountries[submission.phoneCountry];
     const phoneDigits = submission.phone.replace(/\D/g, '');
     const phoneIsValid = Boolean(phoneConfig) && /^[0-9().\-\s]{7,30}$/.test(submission.phone) && phoneDigits.length >= phoneConfig.min && phoneDigits.length <= phoneConfig.max;
-    if (submission.name.length < 2 || !emailIsValid || !phoneIsValid || !allowedServices.has(submission.service) || submission.message.length < 20) {
+    if (!allowedRequestTypes.has(submission.requestType) || submission.name.length < 2 || !emailIsValid || !phoneIsValid || !allowedServices.has(submission.service) || submission.message.length < 20) {
       sendJson(res, 400, { message: 'Please provide your name, a valid email and phone number, service, and project brief.' });
       return;
     }
@@ -185,7 +188,8 @@ function sendFile(req, res, filename, type) {
   const range = req.headers.range;
   res.setHeader('Accept-Ranges', 'bytes');
   res.setHeader('Content-Type', type || 'application/octet-stream');
-  res.setHeader('Cache-Control', 'public, max-age=3600');
+  const isLivePageAsset = type && (type.startsWith('text/html') || type.startsWith('text/css') || type.startsWith('text/javascript'));
+  res.setHeader('Cache-Control', isLivePageAsset ? 'no-cache' : 'public, max-age=3600');
   if (range) {
     const match = /^bytes=(\d*)-(\d*)$/.exec(range);
     if (match) {

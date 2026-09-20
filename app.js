@@ -86,7 +86,7 @@ if (workCarousel) {
   let renderedPosition = 0;
 
   function setActiveVideo(nextIndex, sectionVisible, shouldPlay = sectionVisible) {
-    const nextPlaying = sectionVisible && shouldPlay && !reducedMotion;
+    const nextPlaying = sectionVisible && shouldPlay;
     if (activeIndex === nextIndex && activeVisible === sectionVisible && activePlaying === nextPlaying) {
       if (nextPlaying && videos[nextIndex].paused) playMutedVideo(videos[nextIndex]);
       return;
@@ -108,22 +108,6 @@ if (workCarousel) {
   function measureWorkCarousel() {
     const rect = workCarousel.getBoundingClientRect();
     const sectionVisible = rect.bottom > 0 && rect.top < window.innerHeight;
-
-    if (reducedMotion) {
-      const trackCenter = track.scrollLeft + track.clientWidth / 2;
-      const nextIndex = cards.reduce((closestIndex, card, index) => {
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const closestCard = cards[closestIndex];
-        const closestCenter = closestCard.offsetLeft + closestCard.offsetWidth / 2;
-        return Math.abs(cardCenter - trackCenter) < Math.abs(closestCenter - trackCenter) ? index : closestIndex;
-      }, 0);
-      const activeCard = cards[nextIndex];
-      const activeCenter = activeCard.offsetLeft + activeCard.offsetWidth / 2;
-      const centered = Math.abs(activeCenter - trackCenter) < track.clientWidth * 0.18;
-      setActiveVideo(nextIndex, sectionVisible, centered);
-      return;
-    }
-
     const scrollableDistance = Math.max(workCarousel.offsetHeight - window.innerHeight, 1);
     const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
     targetPosition = progress * (cards.length - 1);
@@ -135,7 +119,7 @@ if (workCarousel) {
     const rect = workCarousel.getBoundingClientRect();
     const sectionVisible = rect.bottom > 0 && rect.top < window.innerHeight;
     const delta = targetPosition - renderedPosition;
-    renderedPosition += Math.abs(delta) < 0.001 ? delta : delta * 0.18;
+    renderedPosition = reducedMotion || Math.abs(delta) < 0.001 ? targetPosition : renderedPosition + delta * 0.18;
     const position = renderedPosition;
     const progress = position / Math.max(cards.length - 1, 1);
     const nextIndex = Math.round(position);
@@ -192,7 +176,7 @@ const toggle = document.querySelector('[data-video-toggle]');
 let showreelUserPaused = false;
 
 function setShowreelPlaying(playing) {
-  if (playing && !reducedMotion && !showreelUserPaused) {
+  if (playing && !showreelUserPaused) {
     playMutedVideo(showreel);
     toggle.textContent = 'Ⅱ';
     toggle.setAttribute('aria-label', 'Pause showreel');
@@ -330,7 +314,7 @@ function openProject(key, trigger) {
   projectOverlay.setAttribute('aria-hidden', 'false');
   document.body.classList.add('drawer-open');
   projectOverlay.querySelector('.drawer-close').focus();
-  if (!isDual && !reducedMotion) drawerVideo.play().catch(() => {});
+  if (!isDual) playMutedVideo(drawerVideo);
 }
 
 document.querySelectorAll('[data-project]').forEach((trigger) => {
@@ -369,9 +353,17 @@ let contactTrigger = null;
 
 function openContact(trigger) {
   contactTrigger = trigger;
+  const intent = trigger?.dataset.contactIntent;
+  if (intent && contactForm.elements.requestType) {
+    contactForm.elements.requestType.value = intent;
+    contactForm.elements.requestType.dispatchEvent(new Event('change'));
+  }
+  const requestLabel = intent === 'audit' ? 'Request a brand audit.' : intent === 'meeting' ? 'Book a discovery meeting.' : 'Tell us what\nyou’re building.';
+  document.querySelector('#contact-dialog-title').textContent = requestLabel;
   contactOverlay.classList.add('open');
   contactOverlay.setAttribute('aria-hidden', 'false');
   document.body.classList.add('contact-open');
+  contactOverlay.querySelector('.contact-dialog').scrollTop = 0;
   window.setTimeout(() => contactForm.elements.name.focus(), 80);
 }
 
@@ -385,6 +377,85 @@ function closeContact() {
 if (contactForm) {
   const phoneCountry = contactForm.elements.phoneCountry;
   const phoneInput = contactForm.elements.phone;
+
+  function enhanceSelect(select) {
+    const field = select.parentElement;
+    const control = document.createElement('div');
+    const button = document.createElement('button');
+    const menu = document.createElement('div');
+    const label = document.createElement('span');
+    const chevron = document.createElement('i');
+    const menuId = `${select.name}-options`;
+
+    control.className = 'custom-select';
+    button.className = 'custom-select-trigger';
+    button.type = 'button';
+    button.setAttribute('aria-haspopup', 'listbox');
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', menuId);
+    button.append(label, chevron);
+    menu.className = 'custom-select-menu';
+    menu.id = menuId;
+    menu.setAttribute('role', 'listbox');
+    menu.setAttribute('aria-label', select.closest('label')?.querySelector('span')?.textContent || select.name);
+
+    [...select.options].forEach((option) => {
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'custom-select-option';
+      item.textContent = option.textContent;
+      item.dataset.value = option.value;
+      item.setAttribute('role', 'option');
+      item.addEventListener('click', () => {
+        select.value = option.value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        button.focus();
+        close();
+      });
+      menu.append(item);
+    });
+
+    function sync() {
+      const option = select.options[select.selectedIndex];
+      label.textContent = option.textContent;
+      [...menu.children].forEach((item) => {
+        const selected = item.dataset.value === option.value;
+        item.classList.toggle('is-selected', selected);
+        item.setAttribute('aria-selected', String(selected));
+      });
+    }
+    function close() {
+      control.classList.remove('is-open');
+      button.setAttribute('aria-expanded', 'false');
+    }
+    function positionMenu() {
+      const bounds = button.getBoundingClientRect();
+      const spaceAbove = bounds.top;
+      const spaceBelow = window.innerHeight - bounds.bottom;
+      const menuHeight = Math.min(menu.scrollHeight + 8, 280);
+      const openUpward = spaceBelow < menuHeight && spaceAbove > spaceBelow;
+      control.classList.toggle('opens-upward', openUpward);
+      const availableSpace = (openUpward ? spaceAbove : spaceBelow) - 16;
+      menu.style.maxHeight = `${Math.max(132, Math.min(280, availableSpace))}px`;
+    }
+    button.addEventListener('click', () => {
+      const opening = !control.classList.contains('is-open');
+      document.querySelectorAll('.custom-select.is-open').forEach((item) => item.classList.remove('is-open'));
+      if (opening) positionMenu();
+      control.classList.toggle('is-open', opening);
+      button.setAttribute('aria-expanded', String(opening));
+    });
+    select.addEventListener('change', sync);
+    document.addEventListener('pointerdown', (event) => { if (!control.contains(event.target)) close(); });
+    window.addEventListener('resize', () => { if (control.classList.contains('is-open')) positionMenu(); });
+    select.classList.add('native-select');
+    select.tabIndex = -1;
+    control.append(select, button, menu);
+    field?.append(control);
+    sync();
+  }
+
+  contactForm.querySelectorAll('select.branded-select').forEach(enhanceSelect);
 
   function syncPhoneCountry() {
     const option = phoneCountry.options[phoneCountry.selectedIndex];

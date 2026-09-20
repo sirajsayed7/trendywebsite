@@ -241,3 +241,67 @@ body.contact-open{overflow:hidden}
 .contact-fields select.branded-select,.phone-input select{font-weight:700;letter-spacing:.03em}
 .contact-fields select.branded-select:focus,.phone-input select:focus{border-color:#d9ff45}
 @media(max-width:740px){.phone-input{grid-template-columns:minmax(108px,.6fr) 1fr;gap:12px}.work-carousel-intro{background:linear-gradient(var(--paper) 0 76%,transparent);padding-bottom:16px}}
+
+/* Premium product polish: quiet surfaces, generous rhythm, and focused actions. */
+:root{--paper:#f5f5f2;--ink:#111113;--line:rgba(17,17,19,.16);--ease:cubic-bezier(.2,.8,.2,1)}
+.section-pad{padding-top:clamp(96px,12vw,190px);padding-bottom:clamp(96px,12vw,190px)}
+.button,.master-cta,.contact-submit{border-radius:999px;transition:transform .28s var(--ease),box-shadow .28s var(--ease),background .28s var(--ease),color .28s var(--ease)}
+.button:hover,.master-cta:hover,.contact-submit:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.14)}
+.showreel{border-radius:28px;margin:0 var(--pad);height:min(76vw,800px);min-height:540px;isolation:isolate}
+.showreel-copy h2{letter-spacing:-.075em}.showreel-meta{right:36px;bottom:36px}
+.work-carousel{background:linear-gradient(180deg,var(--paper),#eeefeb)}
+.work-carousel-card{border-radius:22px;overflow:hidden;box-shadow:0 24px 56px rgba(17,17,19,.16)}
+.work-carousel-card .work-media{border-radius:22px 22px 0 0}.work-carousel-card .work-caption{padding:17px 18px 19px;background:rgba(255,255,255,.76)}
+.capabilities{background:#111113}.cap-row{border-color:rgba(255,255,255,.18)}.cap-row:hover{border-radius:14px}
+.process-steps{border-color:var(--line);gap:12px;border:0}.process-steps li{aspect-ratio:auto;min-height:220px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.48);padding:22px;transition:transform .28s var(--ease),box-shadow .28s var(--ease),background .28s var(--ease)}
+.process-steps li:hover{transform:translateY(-5px);background:#fff;box-shadow:0 18px 36px rgba(17,17,19,.1)}
+.contact{padding-top:clamp(96px,12vw,180px)}
+.contact-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0 0 clamp(72px,9vw,130px)}
+.contact-action{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:14px 20px;align-items:start;min-height:180px;padding:24px;border:1px solid rgba(255,255,255,.2);border-radius:20px;background:rgba(255,255,255,.04);transition:transform .3s var(--ease),background .3s var(--ease),border-color .3s var(--ease)}
+.contact-action:hover{transform:translateY(-4px);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.46)}
+.contact-action span,.contact-action small{font-size:9px;line-height:1.55;letter-spacing:.11em;text-transform:uppercase;color:#aaa}.contact-action strong{font-size:clamp(21px,2.1vw,34px);letter-spacing:-.045em;line-height:.95}.contact-action small{grid-column:2/3;max-width:34ch}.contact-action b{font-size:22px;font-weight:400}
+.contact-dialog{border-left:1px solid rgba(255,255,255,.16);background:rgba(17,17,19,.98)}
+.contact-dialog .contact-fields input,.contact-dialog .contact-fields select,.contact-dialog .contact-fields textarea{border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:14px 15px;background:rgba(255,255,255,.06);font-size:16px;letter-spacing:0}.contact-dialog .contact-fields input:focus,.contact-dialog .contact-fields select:focus,.contact-dialog .contact-fields textarea:focus{border-color:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.12)}
+@media(max-width:740px){.showreel{margin:0;border-radius:0;min-height:520px}.contact-actions{grid-template-columns:1fr}.contact-action{min-height:150px}.process-steps{gap:9px}.process-steps li{min-height:180px;padding:17px;border-radius:14px}}
+
+/* Custom select controls avoid browser-native dropdown styling. */
+.native-select{position:absolute!important;inline-size:1px!important;block-size:1px!important;opacity:0!important;pointer-events:none!important}
+.custom-select{position:relative;width:100%;margin-top:1px}.custom-select-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:54px;padding:0 16px;border:1px solid rgba(255,255,255,.24);border-radius:14px;background:rgba(255,255,255,.065);color:#fff;text-align:left;font:inherit;font-size:16px;letter-spacing:0;cursor:pointer;transition:border-color .22s var(--ease),background .22s var(--ease),box-shadow .22s var(--ease)}
+.custom-select-trigger:hover,.custom-select.is-open .custom-select-trigger{border-color:rgba(255,255,255,.64);background:rgba(255,255,255,.1)}.custom-select-trigger:focus-visible{outline:0;box-shadow:0 0 0 4px rgba(255,255,255,.14)}
+.custom-select-trigger i{width:8px;height:8px;margin-right:4px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-3px);transition:transform .22s var(--ease)}.custom-select.is-open .custom-select-trigger i{transform:rotate(225deg) translate(-1px,-3px)}
+.custom-select-menu{position:absolute;z-index:10;right:0;left:0;top:calc(100% + 8px);display:grid;gap:3px;overflow-y:auto;padding:7px;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:rgba(29,29,31,.98);box-shadow:0 20px 48px rgba(0,0,0,.34);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s var(--ease),transform .18s var(--ease),visibility .18s;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.custom-select.opens-upward .custom-select-menu{top:auto;bottom:calc(100% + 8px);transform:translateY(6px);box-shadow:0 -20px 48px rgba(0,0,0,.34)}.custom-select.is-open .custom-select-menu{opacity:1;visibility:visible;transform:none}.custom-select-option{width:100%;padding:12px 13px;border:0;border-radius:10px;background:transparent;color:#fff;text-align:left;font:inherit;font-size:15px;letter-spacing:0;cursor:pointer;transition:background .16s var(--ease),color .16s var(--ease)}.custom-select-option:hover,.custom-select-option:focus-visible{outline:0;background:rgba(255,255,255,.12)}.custom-select-option.is-selected{background:#fff;color:#161617}
+
+/* Compact conversion form: keep the key decision and submit action within a short scan. */
+.contact-dialog{width:min(940px,78vw);padding-bottom:30px}.contact-dialog-header{padding:22px 0 15px}.contact-dialog .contact-form{padding-top:36px}.contact-dialog .contact-form-heading{align-items:end;margin-bottom:32px}.contact-dialog .contact-form-heading p{max-width:12ch;font-size:clamp(38px,4.1vw,58px);line-height:.88;letter-spacing:-.06em}.contact-dialog .contact-fields{gap:20px 28px}.contact-dialog .contact-fields label{gap:8px}.contact-dialog .contact-fields input,.contact-dialog .contact-fields select,.contact-dialog .contact-fields textarea{min-height:48px;padding:11px 14px;font-size:15px}.contact-dialog .contact-message{margin-top:2px}.contact-dialog .contact-fields textarea{height:112px;min-height:112px;resize:vertical}.contact-dialog .contact-submit-row{align-items:center;margin-top:24px;padding-bottom:0}.contact-dialog .contact-submit{min-width:210px;padding:15px 18px}.contact-dialog .contact-status{font-size:9px}
+@media(max-width:740px){.contact-dialog{width:100%;padding-bottom:28px}.contact-dialog .contact-form{padding-top:30px}.contact-dialog .contact-form-heading{margin-bottom:28px}.contact-dialog .contact-form-heading p{font-size:13vw}.contact-dialog .contact-fields{gap:18px}.contact-dialog .contact-fields textarea{height:108px;min-height:108px}.contact-dialog .contact-submit-row{margin-top:22px}}
+
+/* Let the form title use the panel's full editorial width on desktop. */
+@media(min-width:741px){.contact-dialog .contact-form-heading{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:28px}.contact-dialog .contact-form-heading p{width:auto;max-width:none;white-space:pre-line}.contact-dialog .contact-form-heading span{text-align:right;line-height:1.7}}
+
+/* Compact, consistently proportioned form controls. */
+.contact-dialog .contact-fields input,.contact-dialog .contact-fields select{height:50px;min-height:0;padding:0 14px;font-size:16px;line-height:1.2}.contact-dialog .phone-input select,.contact-dialog .phone-input input{height:50px}.contact-dialog .contact-fields textarea{height:100px;min-height:100px;padding:13px 14px;font-size:16px;line-height:1.4}.contact-dialog .custom-select-trigger{min-height:50px;height:50px;padding:0 14px;font-size:16px}.contact-dialog .contact-fields{gap:18px 28px}.contact-dialog .contact-fields label{gap:7px}
+@media(max-width:740px){.contact-dialog .contact-fields input,.contact-dialog .contact-fields select,.contact-dialog .phone-input select,.contact-dialog .phone-input input,.contact-dialog .custom-select-trigger{height:50px;min-height:50px;font-size:16px}.contact-dialog .contact-fields textarea{height:100px;min-height:100px}}
+
+/* Primary form action matches the compact field system. */
+.contact-dialog .contact-submit{width:auto;min-width:204px;height:50px;padding:0 16px;border:0;border-radius:14px;font-size:11px;letter-spacing:.13em}.contact-dialog .contact-submit b{font-size:18px;line-height:1}.contact-dialog .contact-submit:hover{box-shadow:0 10px 24px rgba(255,255,255,.12)}
+@media(max-width:740px){.contact-dialog .contact-submit{width:100%;height:52px;border-radius:14px;font-size:11px}}
+
+/* A desktop form panel should end with the form, not an empty full-height drawer. */
+@media(min-width:741px){.contact-dialog{top:0;height:100%;max-height:none;min-height:0;border-radius:0;overflow-y:auto}}
+
+/* Refined utility header for the enquiry panel. */
+.contact-dialog-header{height:68px;padding:0;border-bottom-color:rgba(255,255,255,.16);background:linear-gradient(180deg,rgba(24,24,26,.98),rgba(17,17,19,.96));box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.contact-dialog-header p{display:flex;align-items:center;gap:10px;color:#f5f5f5}.contact-dialog-header p:before{content:"";width:6px;height:6px;border-radius:50%;background:#d9ff45;box-shadow:0 0 0 4px rgba(217,255,69,.12)}
+.contact-close{min-height:40px;padding:0 10px 0 13px;border-radius:10px;transition:background .2s var(--ease),transform .2s var(--ease)}.contact-close:hover{background:rgba(255,255,255,.08);transform:translateX(2px)}.contact-close i,.contact-close i:after{width:19px}
+@media(max-width:740px){.contact-dialog-header{height:62px}.contact-close{min-height:38px}}
+
+/* Premium project case-study drawer. */
+.project-drawer{width:min(920px,76vw);background:#f5f5f2;box-shadow:-28px 0 90px rgba(0,0,0,.28)}
+.drawer-header{height:76px;padding:0 24px;justify-content:flex-end;mix-blend-mode:normal;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,0));backdrop-filter:none;-webkit-backdrop-filter:none}
+.drawer-close{min-height:40px;padding:0 13px 0 15px;border:1px solid rgba(255,255,255,.42);border-radius:999px;background:rgba(14,14,15,.28);color:#fff;font-size:9px;letter-spacing:.14em;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:background .22s var(--ease),border-color .22s var(--ease),transform .22s var(--ease)}
+.drawer-close:hover{background:rgba(255,255,255,.94);border-color:#fff;color:#111;transform:translateY(-1px)}.drawer-close i,.drawer-close i:after{width:18px}
+.drawer-media{height:min(60vh,640px);min-height:420px;background:#111}.drawer-media:after{background:linear-gradient(180deg,rgba(0,0,0,.15),transparent 25%,transparent 72%,rgba(0,0,0,.28))}.drawer-media video{filter:none}
+.drawer-media>span{left:32px;bottom:26px;padding:7px 11px 5px;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(0,0,0,.2);font-size:clamp(28px,4vw,48px);font-weight:700;line-height:1;color:#fff;letter-spacing:-.05em;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);text-shadow:0 1px 10px rgba(0,0,0,.28)}
+.drawer-content{padding:38px clamp(32px,5vw,58px) 64px}.drawer-category{padding-top:12px;border-top-color:rgba(17,17,19,.25);font-size:9px;letter-spacing:.16em}.drawer-content h2{max-width:760px;margin:44px 0 24px;font-size:clamp(46px,5.4vw,78px);line-height:.88;letter-spacing:-.065em}.drawer-description{max-width:58ch;font-size:clamp(17px,1.55vw,21px);line-height:1.45;color:#333}.drawer-meta{margin:48px 0 28px;padding-top:14px;border-top-color:rgba(17,17,19,.24)}.drawer-meta span{color:#666}.drawer-meta b{font-size:14px}.drawer-cta{min-height:50px;border-radius:14px;padding:0 18px}
+@media(max-width:740px){.project-drawer{top:8px;width:100vw;height:calc(100% - 8px);border-radius:20px 20px 0 0}.drawer-header{height:64px;padding:0 14px}.drawer-close{min-height:38px}.drawer-media{height:52svh;min-height:320px;border-radius:20px 20px 0 0}.drawer-media>span{left:16px;bottom:16px;padding:6px 9px 4px;font-size:34px}.drawer-content{padding:26px 20px 42px}.drawer-content h2{margin:34px 0 20px;font-size:clamp(42px,11.5vw,62px);line-height:.9}.drawer-description{font-size:17px}.drawer-meta{margin-top:38px;gap:24px}.drawer-cta{min-height:50px}}

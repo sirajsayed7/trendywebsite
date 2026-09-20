@@ -168,7 +168,7 @@
             <article class="work-card work-carousel-card is-active" id="project-denza" data-work-slide="0">
               <a href="#contact" aria-label="Start a project like Denza">
                 <div class="work-media media-fit" style="--poster:url('/media/ff3ccab4b45526e4d7faf9ec.jpg')">
-                  <video muted loop playsinline preload="auto" poster="/media/ff3ccab4b45526e4d7faf9ec.jpg">
+                  <video autoplay muted loop playsinline preload="auto" poster="/media/ff3ccab4b45526e4d7faf9ec.jpg">
                     <source src="/media/d52bb18e55cc3d9dbb8885b1.mp4" type="video/mp4">
                   </video>
                   <span class="work-number">01</span>
@@ -181,7 +181,7 @@
             <article class="work-card work-carousel-card" id="project-onestop" data-work-slide="1" aria-hidden="true">
               <a href="#contact" aria-label="Start a project like One Stop">
                 <div class="work-media media-fit" style="--poster:url('/media/88dbb2a3a602efe9f30eace6.jpg')">
-                  <video muted loop playsinline preload="auto" poster="/media/88dbb2a3a602efe9f30eace6.jpg">
+                  <video autoplay muted loop playsinline preload="auto" poster="/media/88dbb2a3a602efe9f30eace6.jpg">
                     <source src="/media/350e255be2226ad4e771ed2e.mp4" type="video/mp4">
                   </video>
                   <span class="work-number">02</span><span class="view-chip">View project ↗</span>
@@ -193,7 +193,7 @@
             <article class="work-card work-carousel-card" id="project-sada" data-work-slide="2" aria-hidden="true">
               <a href="#contact" aria-label="Start a project like Sada">
                 <div class="work-media media-fit" style="--poster:url('/media/51b58e4573abca07c7c8800b.jpg')">
-                  <video muted loop playsinline preload="auto" poster="/media/51b58e4573abca07c7c8800b.jpg">
+                  <video autoplay muted loop playsinline preload="auto" poster="/media/51b58e4573abca07c7c8800b.jpg">
                     <source src="/media/eb5aa81baf629d2062c653db.mp4" type="video/mp4">
                   </video>
                   <span class="work-number">03</span><span class="view-chip">View project ↗</span>
@@ -242,6 +242,10 @@
         <div class="section-label section-label-light reveal"><span>05</span><p>Start a project</p></div>
       </div>
       <a class="contact-link reveal" href="#contact" data-contact-open aria-haspopup="dialog">Let’s make<br><em>something move.</em><span>↗</span></a>
+      <div class="contact-actions reveal" aria-label="Ways to start">
+        <a href="#contact" class="contact-action" data-contact-open data-contact-intent="audit"><span>01</span><strong>Request a brand audit</strong><small>A clear view of what is working, what is not, and where to focus next.</small><b aria-hidden="true">↗</b></a>
+        <a href="#contact" class="contact-action" data-contact-open data-contact-intent="meeting"><span>02</span><strong>Book a discovery meeting</strong><small>A focused first conversation about your goals, team and next campaign.</small><b aria-hidden="true">↗</b></a>
+      </div>
       <footer>
         <a class="wordmark-footer" href="#top" aria-label="Trendy home"><img src="/assets/trendy-wordmark-white.png" alt="Trendy"></a>
         <div><p>Doha, Qatar</p><p>+974 3110 3133</p></div>
@@ -264,6 +268,7 @@
           <span>Required fields are marked *</span>
         </div>
         <div class="contact-fields">
+          <label><span>How would you like to start? *</span><select class="branded-select" name="requestType" required><option value="project">Start a project</option><option value="audit">Request a brand audit</option><option value="meeting">Book a discovery meeting</option></select></label>
           <label><span>Name *</span><input type="text" name="name" autocomplete="name" minlength="2" maxlength="100" required></label>
           <label><span>Email *</span><input type="email" name="email" autocomplete="email" maxlength="160" required></label>
           <label class="phone-field"><span>Phone *</span><div class="phone-input"><select name="phoneCountry" aria-label="Country code"><option value="QA" data-code="+974" data-min="8" data-max="8" data-placeholder="3110 3133">QA +974</option><option value="AE" data-code="+971" data-min="9" data-max="9" data-placeholder="50 123 4567">AE +971</option><option value="SA" data-code="+966" data-min="9" data-max="9" data-placeholder="50 123 4567">SA +966</option><option value="KW" data-code="+965" data-min="8" data-max="8" data-placeholder="5123 4567">KW +965</option><option value="BH" data-code="+973" data-min="8" data-max="8" data-placeholder="3612 3456">BH +973</option><option value="OM" data-code="+968" data-min="8" data-max="8" data-placeholder="9123 4567">OM +968</option><option value="GB" data-code="+44" data-min="10" data-max="10" data-placeholder="7123 456789">GB +44</option><option value="US" data-code="+1" data-min="10" data-max="10" data-placeholder="201 555 0123">US +1</option><option value="CA" data-code="+1" data-min="10" data-max="10" data-placeholder="416 555 0123">CA +1</option><option value="IN" data-code="+91" data-min="10" data-max="10" data-placeholder="98765 43210">IN +91</option><option value="PK" data-code="+92" data-min="10" data-max="10" data-placeholder="301 2345678">PK +92</option><option value="EG" data-code="+20" data-min="10" data-max="10" data-placeholder="100 123 4567">EG +20</option></select><input type="tel" name="phone" autocomplete="tel" inputmode="tel" minlength="8" maxlength="10" placeholder="3110 3133" required></div></label>
@@ -284,7 +289,6 @@
     <button class="project-backdrop" type="button" data-project-close aria-label="Close project"></button>
     <aside class="project-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
       <header class="drawer-header">
-        <a class="wordmark wordmark-drawer" href="#top" tabindex="-1"><img src="/assets/trendy-wordmark-white.png" alt="Trendy"></a>
         <button class="drawer-close" type="button" data-project-close><span>Close</span><i></i></button>
       </header>
       <div class="drawer-media">
@@ -315,6 +319,6 @@
     </aside>
   </div>
 
-  <script src="/app.js?v=24" defer></script>
+  <script src="/app.js?v=30" defer></script>
 </body>
 </html>
