@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 190" role="img" aria-labelledby="title">
+  <title id="title">One Stop London</title>
+  <g fill="none" stroke="#fff" stroke-width="6">
+    <circle cx="90" cy="82" r="67"/>
+    <path d="M23 82h134"/>
+  </g>
+  <g fill="#fff" font-family="Arial Black, Arial, sans-serif" font-weight="900" text-anchor="middle">
+    <text x="90" y="76" font-size="46" letter-spacing="-3">ONE</text>
+    <text x="90" y="126" font-size="43" letter-spacing="1">STOP</text>
+    <text x="90" y="170" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="6">LONDON</text>
+  </g>
+</svg>
