@@ -1,0 +1,11 @@
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+.qa-edge*/
+redesign-preview*.png
+redesign-mobile*.png
+assets/approved-home.jpeg
+.qa-*/
+redesign-*.png
+data/*.jsonl
