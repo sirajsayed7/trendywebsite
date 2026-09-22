@@ -425,3 +425,27 @@ body.contact-open{overflow:hidden}
   .contact .footer-contact-item strong{font-size:8.5px;letter-spacing:.025em}
   .contact .copyright{grid-area:copyright;margin-top:2px}
 }
+
+/* Mobile hero: all four featured sectors are visible without a hidden horizontal gesture. */
+.mobile-work-nav-head{display:none}
+@media(max-width:740px){
+  .mobile-hero{--hero-canvas:max(92svh,760px);min-height:auto;padding:0;overflow:hidden;background:#090909}
+  .mobile-hero .hero-copy{min-height:var(--hero-canvas);padding:104px 18px 82px}
+  .mobile-hero .hero-copy .eyebrow{font-size:9px;letter-spacing:.145em}
+  .mobile-hero .hero-copy h1{margin:46px 0 42px;font-size:clamp(54px,14.4vw,64px);line-height:.82;letter-spacing:-.074em}
+  .mobile-hero .hero-actions .button-dark{width:min(256px,100%);min-height:60px;border-radius:14px}
+  .mobile-hero .hero-visual{inset:0 0 auto;height:var(--hero-canvas)}
+  .mobile-hero .hero-visual:after{background:linear-gradient(180deg,rgba(245,248,250,.73) 0%,rgba(245,248,250,.36) 34%,rgba(245,248,250,.08) 58%,transparent 74%)}
+  .mobile-hero .project-rail{position:relative;z-index:4;left:auto;right:auto;bottom:auto;height:auto;padding:23px 18px 28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto repeat(2,148px);gap:8px;overflow:visible;background:#090909;scroll-margin-top:84px}
+  .mobile-work-nav-head{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;min-height:38px;padding-bottom:8px;color:#fff;border-bottom:1px solid rgba(255,255,255,.25);font-size:9px;line-height:1;letter-spacing:.14em;text-transform:uppercase}
+  .mobile-work-nav-head p{margin:0;color:rgba(255,255,255,.58);font-size:8px;letter-spacing:.11em}
+  .mobile-hero .rail-card{min-width:0;height:148px;border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+  .mobile-hero .rail-card:after{background:linear-gradient(180deg,rgba(0,0,0,.18),transparent 36%,rgba(0,0,0,.78))}
+  .mobile-hero .rail-card:before{content:"↗";position:absolute;z-index:3;right:9px;top:9px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.94);color:#090909;font-size:14px;line-height:1}
+  .mobile-hero .rail-card:active{transform:scale(.985)}
+  .mobile-hero .rail-index{left:10px;top:11px;font-size:8px;color:rgba(255,255,255,.8)}
+  .mobile-hero .rail-label{left:11px;right:10px;bottom:10px;display:flex;align-items:flex-start;flex-direction:column;gap:3px}
+  .mobile-hero .rail-label b{font-size:18px;line-height:1;letter-spacing:-.035em;text-transform:none}
+  .mobile-hero .rail-label small{font-size:7px;line-height:1.2;letter-spacing:.105em;color:rgba(255,255,255,.68)}
+  .mobile-hero .sector-ticker{display:none}
+}
