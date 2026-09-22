@@ -441,11 +441,26 @@ body.contact-open{overflow:hidden}
   .mobile-work-nav-head p{margin:0;color:rgba(255,255,255,.58);font-size:8px;letter-spacing:.11em}
   .mobile-hero .rail-card{min-width:0;height:148px;border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
   .mobile-hero .rail-card:after{background:linear-gradient(180deg,rgba(0,0,0,.18),transparent 36%,rgba(0,0,0,.78))}
-  .mobile-hero .rail-card:before{content:"↗";position:absolute;z-index:3;right:9px;top:9px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.94);color:#090909;font-size:14px;line-height:1}
+  .mobile-hero .rail-card:before{content:"↗";position:absolute;z-index:3;right:11px;top:10px;width:auto;height:auto;background:transparent;color:#fff;font-size:19px;font-weight:400;line-height:1;text-shadow:0 2px 9px rgba(0,0,0,.65)}
   .mobile-hero .rail-card:active{transform:scale(.985)}
   .mobile-hero .rail-index{left:10px;top:11px;font-size:8px;color:rgba(255,255,255,.8)}
   .mobile-hero .rail-label{left:11px;right:10px;bottom:10px;display:flex;align-items:flex-start;flex-direction:column;gap:3px}
   .mobile-hero .rail-label b{font-size:18px;line-height:1;letter-spacing:-.035em;text-transform:none}
   .mobile-hero .rail-label small{font-size:7px;line-height:1.2;letter-spacing:.105em;color:rgba(255,255,255,.68)}
   .mobile-hero .sector-ticker{display:none}
+}
+
+/* Mobile studio: tighter rhythm, calmer type and properly spaced metrics. */
+@media(max-width:740px){
+  .intro.section-pad{padding:64px 18px 68px}
+  .intro .section-label{padding-top:9px;border-color:rgba(9,9,9,.3)}
+  .intro .intro-statement{margin:40px 0 38px}
+  .intro .kicker{margin:0 0 22px;font-size:8.5px;line-height:1.4;letter-spacing:.135em;color:rgba(9,9,9,.68)}
+  .intro .intro-statement h2{max-width:100%;font-size:clamp(42px,11.8vw,50px);line-height:.91;letter-spacing:-.06em;text-wrap:balance}
+  .intro .intro-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}
+  .intro .intro-stat{min-height:138px;padding:16px 14px 14px;border:1px solid rgba(9,9,9,.14);border-radius:14px;background:rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.75)}
+  .intro .intro-stat strong{display:flex;align-items:flex-start;gap:5px;margin:0 0 25px;font-size:clamp(46px,12.6vw,54px);font-weight:700;line-height:.82;letter-spacing:-.055em}
+  .intro .intro-stat sup{position:static;margin-top:2px;font-size:17px;font-weight:700;line-height:1;letter-spacing:0}
+  .intro .intro-stat span{display:block;font-size:8px;line-height:1.5;letter-spacing:.09em;color:rgba(9,9,9,.68)}
+  .intro .intro-body{grid-column:1/-1;margin:22px 0 0;padding:18px 0 0;border-top:1px solid rgba(9,9,9,.32);font-size:16px;line-height:1.45;letter-spacing:-.015em;color:rgba(9,9,9,.84)}
 }
