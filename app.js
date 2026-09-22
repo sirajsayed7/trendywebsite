@@ -101,7 +101,8 @@ if (workCarousel) {
     const { top, bottom } = carouselClearance();
     const availableHeight = Math.max(0, track.clientHeight - top - bottom);
     const heightFitWidth = Math.max(100, (availableHeight - captionHeight) * 9 / 16);
-    const width = Math.floor(Math.min(baseWidth, heightFitWidth));
+    const mobileWidth = Math.min(track.clientWidth * 0.72, 292);
+    const width = Math.floor(Math.min(desktopCarousel.matches ? baseWidth : mobileWidth, heightFitWidth));
     cards.forEach((card) => { card.style.width = `${width}px`; });
   }
 
@@ -139,14 +140,15 @@ if (workCarousel) {
     const rect = workCarousel.getBoundingClientRect();
     const sectionVisible = rect.bottom > 0 && rect.top < window.innerHeight;
     const delta = targetPosition - renderedPosition;
-    renderedPosition = reducedMotion || Math.abs(delta) < 0.001 ? targetPosition : renderedPosition + delta * 0.18;
+    const easing = desktopCarousel.matches ? 0.18 : 0.13;
+    renderedPosition = reducedMotion || Math.abs(delta) < 0.001 ? targetPosition : renderedPosition + delta * easing;
     const position = renderedPosition;
     const nextIndex = Math.round(position);
     const isMobile = !desktopCarousel.matches;
-    const ringRadius = isMobile ? Math.min(track.clientWidth * 0.56, 190) : Math.min(track.clientWidth * 0.39, 300);
-    const angleStep = isMobile ? 66 : 72;
+    const ringRadius = isMobile ? Math.min(track.clientWidth * 0.68, 296) : Math.min(track.clientWidth * 0.39, 300);
+    const angleStep = isMobile ? 52 : 72;
     const { top, bottom } = carouselClearance();
-    const baseCenterY = track.clientHeight * (isMobile ? 0.74 : 0.47);
+    const baseCenterY = track.clientHeight * (isMobile ? 0.6 : 0.47);
 
     cards.forEach((card, index) => {
       const rawOffset = index - position;
@@ -156,13 +158,14 @@ if (workCarousel) {
       const radians = angle * Math.PI / 180;
       const depth = Math.cos(radians);
       const x = Math.sin(radians) * ringRadius;
-      const y = (1 - depth) * (isMobile ? 18 : 32);
+      const y = (1 - depth) * (isMobile ? 10 : 32);
       const z = (depth - 1) * ringRadius;
-      const scale = 0.78 + Math.max(depth, 0) * 0.22;
+      const scale = isMobile ? 0.74 + Math.max(depth, 0) * 0.26 : 0.78 + Math.max(depth, 0) * 0.22;
       const centeredX = x - card.offsetWidth / 2;
       const halfHeight = card.offsetHeight / 2;
       const lowestCenter = track.clientHeight - bottom - halfHeight;
-      const centerY = Math.min(Math.max(baseCenterY + y, top + halfHeight), lowestCenter);
+      const preferredCenterY = isMobile ? (top + halfHeight + lowestCenter) / 2 + y : baseCenterY + y;
+      const centerY = Math.min(Math.max(preferredCenterY, top + halfHeight), lowestCenter);
       const centeredY = centerY - baseCenterY - halfHeight;
       card.style.transform = `translate3d(${centeredX}px, ${centeredY}px, ${z}px) rotateY(${angle}deg) scale(${scale})`;
       card.style.opacity = String(Math.max(0.32, 0.6 + depth * 0.4));

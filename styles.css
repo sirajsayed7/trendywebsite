@@ -323,3 +323,30 @@ body.contact-open{overflow:hidden}
 .cap-row{grid-template-columns:8% 36% minmax(0,1fr);transition:none}
 .cap-row:hover{background:transparent;color:inherit;padding:0;border-radius:0}
 @media(max-width:740px){.cap-row{grid-template-columns:35px minmax(0,1fr)}}
+
+/* Premium mobile selected work: wider reels, compact copy and closer previews. */
+@media(max-width:740px){
+  .work-carousel{height:285svh}
+  .work-carousel-sticky{min-height:0;padding:18px 0 20px}
+  .work-carousel-intro{inset:0 18px auto;padding:18px 0 16px;background:linear-gradient(180deg,var(--paper) 0 88%,rgba(245,245,242,0))}
+  .work-carousel .section-label{padding-top:8px}
+  .work-carousel .work-heading{margin:26px 0 0}
+  .work-carousel .work-heading h2{max-width:none;font-size:clamp(43px,12.3vw,54px);line-height:.86;letter-spacing:-.075em;white-space:nowrap}
+  .work-carousel .work-heading p{max-width:42ch;margin:16px 0 0;font-size:9px;line-height:1.5;letter-spacing:.1em}
+  .work-carousel-stage{perspective:1200px;perspective-origin:50% 61%;contain:layout paint}
+  .work-carousel-card{top:60%;width:min(72vw,292px);border-radius:18px;background:#fff;box-shadow:0 18px 46px rgba(17,17,19,.13)}
+  .work-carousel-card.is-active{z-index:100!important;box-shadow:0 24px 58px rgba(17,17,19,.18)}
+  .work-carousel-card .work-media{aspect-ratio:9/16;border-radius:18px 18px 0 0;background:#0d0d0e}
+  .work-carousel-card .media-fit video{object-fit:cover}
+  .work-carousel-card .work-caption{min-height:66px;padding:13px 15px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px;border-top:0;background:#fff}
+  .work-carousel-card .work-caption h3{min-width:0;margin:0;font-size:clamp(24px,7vw,30px);line-height:1;letter-spacing:-.055em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .work-carousel-card .work-caption span{align-self:center;margin:0;font-size:8px;line-height:1;white-space:nowrap;text-align:right}
+  .work-carousel-count{right:18px;bottom:18px;padding:7px 9px 6px;border:1px solid rgba(17,17,19,.16);border-radius:999px;background:rgba(245,245,242,.82);font-size:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+}
+
+@media(max-width:740px) and (max-height:720px){
+  .work-carousel .work-heading{margin-top:20px}
+  .work-carousel .work-heading h2{font-size:42px}
+  .work-carousel .work-heading p{margin-top:12px}
+  .work-carousel-card{width:min(62vw,238px)}
+}
