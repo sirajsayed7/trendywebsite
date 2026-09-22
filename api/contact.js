@@ -122,14 +122,14 @@ module.exports = async function contact(request, response) {
 
     const delivered = await deliverSubmission(submission);
     if (!delivered) {
-      return response.status(503).json({ message: 'Online enquiries are not configured yet. Please email hello@trendy.qa.' });
+      return response.status(503).json({ message: 'Online enquiries are not configured yet. Please email info@trendymedia.org.' });
     }
 
     return response.status(200).json({ message: 'Thanks — your brief is with us. We’ll be in touch soon.' });
   } catch (error) {
     const invalidJson = error instanceof SyntaxError;
     return response.status(invalidJson ? 400 : 500).json({
-      message: invalidJson ? 'Please submit a valid form.' : 'We could not send this right now. Email hello@trendy.qa instead.'
+      message: invalidJson ? 'Please submit a valid form.' : 'We could not send this right now. Email info@trendymedia.org instead.'
     });
   }
 };

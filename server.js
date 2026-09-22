@@ -170,7 +170,7 @@ async function handleContact(req, res) {
       return;
     }
     const status = error.message === 'INVALID_JSON' ? 400 : 500;
-    sendJson(res, status, { message: status === 400 ? 'Please submit a valid form.' : 'We could not send this right now. Email hello@trendy.qa instead.' });
+    sendJson(res, status, { message: status === 400 ? 'Please submit a valid form.' : 'We could not send this right now. Email info@trendymedia.org instead.' });
   }
 }
 

@@ -549,7 +549,7 @@ if (contactForm) {
       contactStatus.textContent = result.message;
       contactStatus.classList.add('is-success');
     } catch (error) {
-      contactStatus.textContent = error.message || 'Something went wrong. Email hello@trendy.qa instead.';
+      contactStatus.textContent = error.message || 'Something went wrong. Email info@trendymedia.org instead.';
       contactStatus.classList.add('is-error');
     } finally {
       submitButton.disabled = false;

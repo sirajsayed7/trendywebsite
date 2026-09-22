@@ -23,7 +23,7 @@ SMTP_SECURE=false
 SMTP_USER=hello@example.com
 SMTP_PASS=your-password
 CONTACT_FROM=hello@example.com
-CONTACT_TO=hello@trendy.qa
+CONTACT_TO=info@trendymedia.org
 ```
 
 Email delivery uses Nodemailer. The endpoint validates input, includes a honeypot field, limits repeat attempts, and caps request size.
