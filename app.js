@@ -75,7 +75,7 @@ if (workCarousel) {
   const cards = [...workCarousel.querySelectorAll('[data-work-slide]')];
   const videos = cards.map((card) => card.querySelector('video'));
   const track = workCarousel.querySelector('.work-carousel-track');
-  const progressBar = workCarousel.querySelector('.work-carousel-progress span');
+  const intro = workCarousel.querySelector('.work-carousel-intro');
   const currentLabel = workCarousel.querySelector('[data-work-current]');
   const desktopCarousel = window.matchMedia('(min-width: 741px)');
   let activeIndex = -1;
@@ -84,6 +84,26 @@ if (workCarousel) {
   let frameRequested = false;
   let targetPosition = 0;
   let renderedPosition = 0;
+
+  function carouselClearance() {
+    const isMobile = !desktopCarousel.matches;
+    const introBottom = isMobile ? intro.getBoundingClientRect().bottom - track.getBoundingClientRect().top : 0;
+    return {
+      top: isMobile ? Math.max(12, introBottom + 12) : 12,
+      bottom: isMobile ? 42 : 20
+    };
+  }
+
+  function fitWorkCarouselCards() {
+    cards.forEach((card) => { card.style.width = ''; });
+    const baseWidth = Math.min(...cards.map((card) => card.offsetWidth));
+    const captionHeight = Math.max(...cards.map((card) => card.querySelector('.work-caption').offsetHeight));
+    const { top, bottom } = carouselClearance();
+    const availableHeight = Math.max(0, track.clientHeight - top - bottom);
+    const heightFitWidth = Math.max(100, (availableHeight - captionHeight) * 9 / 16);
+    const width = Math.floor(Math.min(baseWidth, heightFitWidth));
+    cards.forEach((card) => { card.style.width = `${width}px`; });
+  }
 
   function setActiveVideo(nextIndex, sectionVisible, shouldPlay = sectionVisible) {
     const nextPlaying = sectionVisible && shouldPlay;
@@ -121,11 +141,12 @@ if (workCarousel) {
     const delta = targetPosition - renderedPosition;
     renderedPosition = reducedMotion || Math.abs(delta) < 0.001 ? targetPosition : renderedPosition + delta * 0.18;
     const position = renderedPosition;
-    const progress = position / Math.max(cards.length - 1, 1);
     const nextIndex = Math.round(position);
     const isMobile = !desktopCarousel.matches;
     const ringRadius = isMobile ? Math.min(track.clientWidth * 0.56, 190) : Math.min(track.clientWidth * 0.39, 300);
     const angleStep = isMobile ? 66 : 72;
+    const { top, bottom } = carouselClearance();
+    const baseCenterY = track.clientHeight * (isMobile ? 0.74 : 0.47);
 
     cards.forEach((card, index) => {
       const rawOffset = index - position;
@@ -139,14 +160,16 @@ if (workCarousel) {
       const z = (depth - 1) * ringRadius;
       const scale = 0.78 + Math.max(depth, 0) * 0.22;
       const centeredX = x - card.offsetWidth / 2;
-      const centeredY = y - card.offsetHeight / 2;
+      const halfHeight = card.offsetHeight / 2;
+      const lowestCenter = track.clientHeight - bottom - halfHeight;
+      const centerY = Math.min(Math.max(baseCenterY + y, top + halfHeight), lowestCenter);
+      const centeredY = centerY - baseCenterY - halfHeight;
       card.style.transform = `translate3d(${centeredX}px, ${centeredY}px, ${z}px) rotateY(${angle}deg) scale(${scale})`;
       card.style.opacity = String(Math.max(0.32, 0.6 + depth * 0.4));
       card.style.zIndex = String(50 + Math.round(depth * 20));
       card.style.pointerEvents = Math.abs(offset) < 0.5 ? 'auto' : 'none';
     });
 
-    progressBar.style.transform = `scaleX(${progress})`;
     const activeRawOffset = nextIndex - position;
     const activeOffset = ((activeRawOffset + cards.length / 2) % cards.length + cards.length) % cards.length - cards.length / 2;
     const playThreshold = desktopCarousel.matches ? 0.2 : 0.65;
@@ -161,14 +184,16 @@ if (workCarousel) {
   }
 
   window.addEventListener('scroll', measureWorkCarousel, { passive: true });
-  window.addEventListener('resize', measureWorkCarousel);
+  window.addEventListener('resize', () => { fitWorkCarouselCards(); measureWorkCarousel(); });
   track.addEventListener('scroll', measureWorkCarousel, { passive: true });
-  desktopCarousel.addEventListener('change', measureWorkCarousel);
+  desktopCarousel.addEventListener('change', () => { fitWorkCarouselCards(); measureWorkCarousel(); });
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') measureWorkCarousel();
     else videos.forEach((video) => video.pause());
   });
+  fitWorkCarouselCards();
   measureWorkCarousel();
+  document.fonts?.ready.then(() => { fitWorkCarouselCards(); measureWorkCarousel(); });
 }
 
 const showreel = document.querySelector('.showreel video');
