@@ -265,7 +265,7 @@ const projectData = {
     description: 'Editorial art direction meets the pace of social. We build visually distinct worlds for fashion, hospitality and lifestyle brands while keeping every frame rooted in local culture.'
   },
   automotive: {
-    index: '05',
+    index: '04',
     category: 'Automotive',
     title: 'Built to move.',
     client: 'Denza · Jetour',
