@@ -200,53 +200,17 @@ if (workCarousel) {
 }
 
 const showreel = document.querySelector('.showreel video');
-const toggle = document.querySelector('[data-video-toggle]');
-let showreelUserPaused = false;
-
-function setShowreelPlaying(playing) {
-  if (playing && !showreelUserPaused) {
-    playMutedVideo(showreel);
-    toggle.textContent = 'Ⅱ';
-    toggle.setAttribute('aria-label', 'Pause showreel');
-  } else {
-    showreel.pause();
-    toggle.textContent = '▶';
-    toggle.setAttribute('aria-label', 'Play showreel');
-  }
+if (showreel) {
+  showreel.muted = true;
+  showreel.defaultMuted = true;
+  showreel.loop = true;
+  showreel.playsInline = true;
+  showreel.addEventListener('canplay', () => playMutedVideo(showreel));
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') playMutedVideo(showreel);
+  });
+  playMutedVideo(showreel);
 }
-
-const showreelObserver = new IntersectionObserver(([entry]) => {
-  setShowreelPlaying(entry.isIntersecting);
-}, { threshold: 0.18 });
-showreelObserver.observe(showreel);
-
-function syncShowreelPlayback() {
-  const rect = showreel.getBoundingClientRect();
-  const visible = rect.bottom > 0 && rect.top < window.innerHeight;
-  if (visible && !showreelUserPaused && showreel.paused) setShowreelPlaying(true);
-  if (!visible && !showreel.paused) setShowreelPlaying(false);
-}
-
-showreel.addEventListener('canplay', syncShowreelPlayback);
-window.addEventListener('scroll', syncShowreelPlayback, { passive: true });
-
-toggle.addEventListener('click', () => {
-  if (showreel.paused) {
-    showreelUserPaused = false;
-    setShowreelPlaying(true);
-  } else {
-    showreelUserPaused = true;
-    setShowreelPlaying(false);
-  }
-});
-
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'hidden') showreel.pause();
-  else {
-    const rect = showreel.getBoundingClientRect();
-    setShowreelPlaying(rect.bottom > 0 && rect.top < window.innerHeight);
-  }
-});
 
 const cursor = document.querySelector('.cursor-dot');
 if (window.matchMedia('(pointer:fine)').matches) {
@@ -299,6 +263,16 @@ const projectData = {
     video: '/media/eb5aa81baf629d2062c653db.mp4',
     poster: '/assets/rail-saada-clean-final-v3.png',
     description: 'Editorial art direction meets the pace of social. We build visually distinct worlds for fashion, hospitality and lifestyle brands while keeping every frame rooted in local culture.'
+  },
+  automotive: {
+    index: '05',
+    category: 'Automotive',
+    title: 'Built to move.',
+    client: 'Denza · Jetour',
+    services: 'Campaign concept · Film · Social',
+    video: '/media/d52bb18e55cc3d9dbb8885b1.mp4',
+    poster: '/assets/rail-automotive-denza-jetour-v1.png',
+    description: 'Premium automotive content with presence, pace and precision. From cinematic product films to always-on social, we give every model a distinct visual identity built for attention.'
   }
 };
 
