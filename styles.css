@@ -464,3 +464,51 @@ body.contact-open{overflow:hidden}
   .intro .intro-stat span{display:block;font-size:8px;line-height:1.5;letter-spacing:.09em;color:rgba(9,9,9,.68)}
   .intro .intro-body{grid-column:1/-1;margin:22px 0 0;padding:18px 0 0;border-top:1px solid rgba(9,9,9,.32);font-size:16px;line-height:1.45;letter-spacing:-.015em;color:rgba(9,9,9,.84)}
 }
+
+/* Desktop polish mirrors the mobile hierarchy at a wider editorial scale. */
+@media(min-width:741px){
+  .desktop-master .master-projects button:nth-child(4) img{object-position:center 54%}
+  .desktop-master .master-rail-arrow{color:#fff;text-shadow:0 2px 9px rgba(0,0,0,.65)}
+
+  .intro.section-pad{padding-top:clamp(96px,8vw,128px);padding-bottom:clamp(96px,8vw,128px)}
+  .intro .intro-statement{grid-template-columns:23% minmax(0,1fr);margin:clamp(62px,5.5vw,84px) 0 clamp(58px,5vw,76px)}
+  .intro .kicker{margin:9px 0 0;color:rgba(17,17,19,.66);font-size:9px;letter-spacing:.14em}
+  .intro .intro-statement h2{max-width:1000px;font-size:clamp(66px,6.45vw,102px);line-height:.89;letter-spacing:-.066em}
+  .intro .intro-grid{grid-template-columns:minmax(190px,.62fr) minmax(190px,.62fr) minmax(360px,1.45fr);gap:16px;margin-left:23%}
+  .intro .intro-stat{min-height:190px;padding:22px;border:1px solid rgba(17,17,19,.14);border-radius:18px;background:rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+  .intro .intro-stat strong{display:flex;align-items:flex-start;gap:8px;margin:0 0 42px;font-size:clamp(56px,4.9vw,78px);font-weight:700;line-height:.82;letter-spacing:-.055em}
+  .intro .intro-stat sup{position:static;margin-top:3px;font-size:22px;font-weight:700;line-height:1;letter-spacing:0}
+  .intro .intro-stat span{display:block;color:rgba(17,17,19,.68);font-size:9px;line-height:1.55;letter-spacing:.09em}
+  .intro .intro-body{margin:0;padding:20px 0 0;border-top:1px solid rgba(17,17,19,.34);font-size:clamp(19px,1.55vw,24px);line-height:1.4;letter-spacing:-.02em;color:rgba(17,17,19,.86)}
+
+  .showreel{height:min(68vw,760px);min-height:540px;border-radius:24px}
+  .showreel-copy{bottom:8%;left:clamp(28px,3vw,48px)}
+  .showreel-copy h2{font-size:clamp(82px,9vw,148px);line-height:.78}
+
+  .capabilities.section-pad{padding-top:clamp(104px,8vw,130px);padding-bottom:clamp(104px,8vw,130px)}
+  .capabilities .cap-intro{grid-template-columns:28% minmax(0,1fr);margin:clamp(62px,5.5vw,84px) 0 clamp(70px,6vw,94px)}
+  .capabilities .cap-intro>p{margin-top:8px;color:rgba(255,255,255,.68);font-size:9px;letter-spacing:.12em}
+  .capabilities .cap-intro h2{font-size:clamp(68px,6.6vw,104px);line-height:.88}
+  .capabilities .cap-row{grid-template-columns:6% 34% minmax(0,1fr);gap:2vw;min-height:112px;border-color:rgba(255,255,255,.16)}
+  .capabilities .cap-row>span{color:rgba(255,255,255,.52)}
+  .capabilities .cap-row h3{font-size:clamp(25px,2.15vw,34px);line-height:1}
+  .capabilities .cap-row p{max-width:560px;color:rgba(255,255,255,.74);font-size:clamp(14px,1.08vw,17px);line-height:1.45}
+
+  .process.section-pad{padding-top:clamp(104px,8vw,130px);padding-bottom:clamp(104px,8vw,130px)}
+  .process .process-head{grid-template-columns:minmax(0,1fr) 34%;margin:clamp(62px,5.5vw,84px) 0 clamp(64px,5.5vw,84px)}
+  .process .process-head h2{font-size:clamp(68px,6.5vw,102px);line-height:.89}
+  .process .process-head p{margin:0;max-width:460px;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:rgba(17,17,19,.72)}
+  .process .process-steps{gap:12px}
+  .process .process-steps li{min-height:188px;padding:20px;border-radius:16px;display:grid;grid-template-rows:auto 1fr auto}
+  .process .process-steps h3{align-self:end;margin:0 0 10px;font-size:clamp(30px,2.75vw,43px);line-height:1}
+  .process .process-steps p{align-self:start;margin:0;font-size:14px;line-height:1.4;color:rgba(17,17,19,.68)}
+
+  .contact{padding-top:clamp(104px,8vw,130px)}
+  .contact .contact-link{margin:clamp(68px,6vw,92px) 0 clamp(62px,5.5vw,84px);font-size:clamp(76px,8.4vw,132px);line-height:.82}
+  .contact .contact-link>span.contact-link-action{right:0;top:auto;bottom:3%;display:flex;align-items:center;justify-content:space-between;width:clamp(220px,18vw,270px);min-height:62px;padding:0 18px;border:1px solid #fff;border-radius:16px;background:#fff;color:#111;font-size:10px;font-weight:700;line-height:1;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 14px 36px rgba(0,0,0,.2);transform:none}
+  .contact .contact-link-action small{display:block;font:inherit}
+  .contact .contact-link-action b{font-size:21px;font-weight:400;line-height:1}
+  .contact .contact-link:hover>span.contact-link-action{transform:translateY(-3px)}
+  .contact .contact-actions{gap:14px;margin-bottom:clamp(64px,5.5vw,86px)}
+  .contact .contact-action{min-height:158px;padding:22px;border-radius:18px}
+}
