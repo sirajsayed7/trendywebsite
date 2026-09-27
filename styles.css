@@ -511,4 +511,14 @@ body.contact-open{overflow:hidden}
   .contact .contact-link:hover>span.contact-link-action{transform:translateY(-3px)}
   .contact .contact-actions{gap:14px;margin-bottom:clamp(64px,5.5vw,86px)}
   .contact .contact-action{min-height:158px;padding:22px;border-radius:18px}
+
+  /* Desktop carousel keeps the complete portrait film and mobile-style compact caption. */
+  .work-carousel-card{width:clamp(250px,28vw,380px);border-radius:20px;background:#fff;box-shadow:0 22px 58px rgba(17,17,19,.14)}
+  .work-carousel-card.is-active{box-shadow:0 28px 68px rgba(17,17,19,.18)}
+  .work-carousel-card .work-media{aspect-ratio:9/16;border-radius:20px 20px 0 0;overflow:hidden;background:#0b0b0c}
+  .work-carousel-card .media-fit video{object-fit:contain;transform:none!important;filter:none}
+  .work-carousel-card .work-caption{min-height:76px;padding:12px 15px 13px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto;align-items:center;gap:12px;border-top:0;background:#fff}
+  .work-carousel-card .work-caption h3{min-width:0;margin:0;font-size:clamp(26px,2.2vw,32px);line-height:1;letter-spacing:-.055em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .work-carousel-card .work-caption p{display:none}
+  .work-carousel-card .work-caption span{align-self:center;margin:0;font-size:8px;line-height:1;white-space:nowrap;text-align:right}
 }
