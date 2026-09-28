@@ -75,6 +75,7 @@ if (workCarousel) {
   const cards = [...workCarousel.querySelectorAll('[data-work-slide]')];
   const videos = cards.map((card) => card.querySelector('video'));
   const track = workCarousel.querySelector('.work-carousel-track');
+  const stage = workCarousel.querySelector('.work-carousel-stage');
   const intro = workCarousel.querySelector('.work-carousel-intro');
   const currentLabel = workCarousel.querySelector('[data-work-current]');
   const desktopCarousel = window.matchMedia('(min-width: 741px)');
@@ -84,6 +85,12 @@ if (workCarousel) {
   let frameRequested = false;
   let targetPosition = 0;
   let renderedPosition = 0;
+  let swipePointerId = null;
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+  let swipeStartPosition = 0;
+  let swipeIntent = null;
+  let suppressCarouselClick = false;
 
   function carouselClearance() {
     const isMobile = !desktopCarousel.matches;
@@ -185,6 +192,75 @@ if (workCarousel) {
     frameRequested = true;
     window.requestAnimationFrame(renderWorkCarousel);
   }
+
+  function scrollToWorkIndex(index, behavior = 'smooth') {
+    const nextIndex = Math.min(cards.length - 1, Math.max(0, index));
+    const sectionTop = window.scrollY + workCarousel.getBoundingClientRect().top;
+    const scrollableDistance = Math.max(workCarousel.offsetHeight - window.innerHeight, 1);
+    const progress = cards.length > 1 ? nextIndex / (cards.length - 1) : 0;
+    targetPosition = nextIndex;
+    requestWorkCarouselRender();
+    window.scrollTo({ top: sectionTop + scrollableDistance * progress, behavior });
+  }
+
+  function finishCarouselSwipe(event) {
+    if (event.pointerId !== swipePointerId) return;
+    const deltaX = event.clientX - swipeStartX;
+    if (swipeIntent === 'horizontal') {
+      const startIndex = Math.round(swipeStartPosition);
+      const nextIndex = Math.abs(deltaX) > 30
+        ? startIndex + (deltaX < 0 ? 1 : -1)
+        : Math.round(targetPosition);
+      suppressCarouselClick = Math.abs(deltaX) > 8;
+      scrollToWorkIndex(nextIndex);
+    } else {
+      measureWorkCarousel();
+    }
+    stage.classList.remove('is-dragging');
+    if (stage.hasPointerCapture?.(event.pointerId)) stage.releasePointerCapture(event.pointerId);
+    swipePointerId = null;
+    swipeIntent = null;
+  }
+
+  stage.addEventListener('pointerdown', (event) => {
+    if (!event.isPrimary || event.button > 0) return;
+    swipePointerId = event.pointerId;
+    swipeStartX = event.clientX;
+    swipeStartY = event.clientY;
+    swipeStartPosition = targetPosition;
+    swipeIntent = null;
+    suppressCarouselClick = false;
+    stage.classList.add('is-dragging');
+    stage.setPointerCapture?.(event.pointerId);
+  });
+
+  stage.addEventListener('pointermove', (event) => {
+    if (event.pointerId !== swipePointerId) return;
+    const deltaX = event.clientX - swipeStartX;
+    const deltaY = event.clientY - swipeStartY;
+    if (!swipeIntent && Math.hypot(deltaX, deltaY) > 8) {
+      swipeIntent = Math.abs(deltaX) > Math.abs(deltaY) * 1.12 ? 'horizontal' : 'vertical';
+    }
+    if (swipeIntent !== 'horizontal') return;
+    event.preventDefault();
+    const dragDistance = Math.max(stage.clientWidth * 0.58, 180);
+    targetPosition = Math.min(cards.length - 1, Math.max(0, swipeStartPosition - deltaX / dragDistance));
+    requestWorkCarouselRender();
+  });
+
+  stage.addEventListener('pointerup', finishCarouselSwipe);
+  stage.addEventListener('pointercancel', finishCarouselSwipe);
+  stage.addEventListener('click', (event) => {
+    if (!suppressCarouselClick) return;
+    event.preventDefault();
+    event.stopPropagation();
+    suppressCarouselClick = false;
+  }, true);
+  stage.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    scrollToWorkIndex(Math.round(targetPosition) + (event.key === 'ArrowRight' ? 1 : -1));
+  });
 
   window.addEventListener('scroll', measureWorkCarousel, { passive: true });
   window.addEventListener('resize', () => { fitWorkCarouselCards(); measureWorkCarousel(); });

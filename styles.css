@@ -38,6 +38,7 @@ body{overflow-x:clip}
 .work-carousel .work-heading h2{font-size:clamp(48px,5.6vw,100px);line-height:.82}
 .work-carousel .work-heading p{max-width:30ch;margin:34px 0 0;font-family:Trendy,Arial,Helvetica,sans-serif;font-size:11px;line-height:1.55;text-transform:uppercase;letter-spacing:.09em}
 .work-carousel-stage{position:relative;min-width:0;overflow:hidden;perspective:1300px;perspective-origin:50% 47%;transform-style:preserve-3d;contain:layout paint}
+.work-carousel-stage{touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}.work-carousel-stage.is-dragging{cursor:grabbing}.work-carousel-stage:focus-visible{outline:1px solid currentColor;outline-offset:-5px}
 .work-carousel-track{position:absolute;inset:0;transform-style:preserve-3d}
 .work-carousel-card{position:absolute;left:50%;top:47%;width:clamp(220px,27vw,340px);max-width:72%;margin:0;transform-style:preserve-3d;transform-origin:center center;backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform,opacity;transition:none;background:var(--paper)}
 .work-carousel-card a{display:block;background:var(--paper)}
