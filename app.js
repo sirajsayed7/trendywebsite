@@ -145,8 +145,8 @@ if (workCarousel) {
     const position = renderedPosition;
     const nextIndex = Math.round(position);
     const isMobile = !desktopCarousel.matches;
-    const ringRadius = isMobile ? Math.min(track.clientWidth * 0.68, 296) : Math.min(track.clientWidth * 0.39, 300);
-    const angleStep = isMobile ? 52 : 72;
+    const ringRadius = isMobile ? Math.min(track.clientWidth * 0.68, 296) : Math.min(track.clientWidth * 0.4, 440);
+    const angleStep = isMobile ? 52 : 44;
     const { top, bottom } = carouselClearance();
     const baseCenterY = track.clientHeight * (isMobile ? 0.6 : 0.47);
 
@@ -158,9 +158,9 @@ if (workCarousel) {
       const radians = angle * Math.PI / 180;
       const depth = Math.cos(radians);
       const x = Math.sin(radians) * ringRadius;
-      const y = (1 - depth) * (isMobile ? 10 : 32);
+      const y = (1 - depth) * (isMobile ? 10 : 18);
       const z = (depth - 1) * ringRadius;
-      const scale = isMobile ? 0.74 + Math.max(depth, 0) * 0.26 : 0.78 + Math.max(depth, 0) * 0.22;
+      const scale = isMobile ? 0.74 + Math.max(depth, 0) * 0.26 : 0.84 + Math.max(depth, 0) * 0.16;
       const centeredX = x - card.offsetWidth / 2;
       const halfHeight = card.offsetHeight / 2;
       const lowestCenter = track.clientHeight - bottom - halfHeight;
@@ -297,6 +297,7 @@ function openProject(key, trigger) {
   document.querySelector('[data-drawer-index]').textContent = project.index;
   document.querySelector('[data-drawer-category]').textContent = project.category;
   document.querySelector('[data-drawer-title]').textContent = project.title;
+  document.querySelector('[data-drawer-media-title]').textContent = project.title;
   document.querySelector('[data-drawer-client]').textContent = project.client;
   document.querySelector('[data-drawer-services]').textContent = project.services;
   document.querySelector('[data-drawer-description]').textContent = project.description;

@@ -304,7 +304,19 @@ body.contact-open{overflow:hidden}
 .drawer-media{height:min(60vh,640px);min-height:420px;background:#111}.drawer-media:after{background:linear-gradient(180deg,rgba(0,0,0,.15),transparent 25%,transparent 72%,rgba(0,0,0,.28))}.drawer-media video{filter:none}
 .drawer-media>span{left:32px;bottom:26px;padding:7px 11px 5px;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(0,0,0,.2);font-size:clamp(28px,4vw,48px);font-weight:700;line-height:1;color:#fff;letter-spacing:-.05em;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);text-shadow:0 1px 10px rgba(0,0,0,.28)}
 .drawer-content{padding:38px clamp(32px,5vw,58px) 64px}.drawer-category{padding-top:12px;border-top-color:rgba(17,17,19,.25);font-size:9px;letter-spacing:.16em}.drawer-content h2{max-width:760px;margin:44px 0 24px;font-size:clamp(46px,5.4vw,78px);line-height:.88;letter-spacing:-.065em}.drawer-description{max-width:58ch;font-size:clamp(17px,1.55vw,21px);line-height:1.45;color:#333}.drawer-meta{margin:48px 0 28px;padding-top:14px;border-top-color:rgba(17,17,19,.24)}.drawer-meta span{color:#666}.drawer-meta b{font-size:14px}.drawer-cta{min-height:50px;border-radius:14px;padding:0 18px}
+.drawer-media-title{position:absolute;z-index:3;left:7%;right:6%;bottom:clamp(30px,7vw,76px);margin:0;color:#fff;font-size:clamp(52px,7.4vw,112px);font-weight:800;line-height:.82;letter-spacing:-.075em;text-transform:uppercase;text-wrap:balance;text-shadow:0 3px 24px rgba(0,0,0,.24)}
+.drawer-media.is-dual .drawer-media-title{display:none}
 @media(max-width:740px){.project-drawer{top:8px;width:100vw;height:calc(100% - 8px);border-radius:20px 20px 0 0}.drawer-header{height:64px;padding:0 14px}.drawer-close{min-height:38px}.drawer-media{height:52svh;min-height:320px;border-radius:20px 20px 0 0}.drawer-media>span{left:16px;bottom:16px;padding:6px 9px 4px;font-size:34px}.drawer-content{padding:26px 20px 42px}.drawer-content h2{margin:34px 0 20px;font-size:clamp(42px,11.5vw,62px);line-height:.9}.drawer-description{font-size:17px}.drawer-meta{margin-top:38px;gap:24px}.drawer-cta{min-height:50px}}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(max-width:740px){.drawer-media{height:calc(100svh - 8px);min-height:520px}.drawer-media video{object-fit:cover}.drawer-media:after{background:linear-gradient(180deg,rgba(0,0,0,.08) 22%,transparent 42%,rgba(0,0,0,.68) 100%)}.drawer-media-title{left:7%;right:5%;bottom:clamp(34px,9vw,72px);font-size:clamp(48px,14vw,76px)}}
+@media(max-width:740px){.drawer-media:not(.is-dual)>span{top:76px;bottom:auto}}
+
+/* Project reels are the hero: fill the frame and carry their title over the image. */
+@media(min-width:741px){.drawer-media{height:min(76vh,780px);min-height:520px}.drawer-media video{object-fit:cover}.drawer-media:after{background:linear-gradient(180deg,rgba(0,0,0,.1) 16%,transparent 42%,rgba(0,0,0,.72) 100%)}}
+@media(min-width:741px){.drawer-media>span{top:92px;bottom:auto}.drawer-media-title{bottom:clamp(54px,6vw,88px)}}
+/* Keep the One Stop mark clear of the project index in the split F&B hero. */
+.drawer-media.is-dual .onestop-logo{top:46%;transform:translateY(-50%)}
+@media(max-width:740px){.drawer-media.is-dual .onestop-logo{top:42%;transform:translateY(-50%)}}
 
 /* Keep the mobile hero composition legible across short and wide phones. */
 @media(max-width:740px){
@@ -521,4 +533,17 @@ body.contact-open{overflow:hidden}
   .work-carousel-card .work-caption h3{min-width:0;margin:0;font-size:clamp(26px,2.2vw,32px);line-height:1;letter-spacing:-.055em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .work-carousel-card .work-caption p{display:none}
   .work-carousel-card .work-caption span{align-self:center;margin:0;font-size:8px;line-height:1;white-space:nowrap;text-align:right}
+  .work-carousel{height:580svh}
 }
+
+@media(max-width:740px){.work-carousel{height:475svh}}
+
+/* Wide desktop carousel: a balanced active card with both adjacent reels visible. */
+@media(min-width:1101px){
+  .work-carousel-sticky{grid-template-columns:minmax(230px,24%) minmax(0,1fr);gap:clamp(20px,2.4vw,40px)}
+  .work-carousel-stage{perspective:1500px;perspective-origin:50% 48%}
+}
+
+/* F&B campaign mark: transparent, high-fidelity vector with deliberate optical sizing. */
+.onestop-logo{left:7%;top:25%;width:clamp(82px,8.4vw,126px);filter:drop-shadow(0 6px 22px rgba(0,0,0,.48))}
+@media(max-width:740px){.onestop-logo{left:6.5%;top:26%;width:58px}}
