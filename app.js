@@ -134,11 +134,6 @@ if (workCarousel) {
   }
 
   function measureWorkCarousel() {
-    const rect = workCarousel.getBoundingClientRect();
-    const sectionVisible = rect.bottom > 0 && rect.top < window.innerHeight;
-    const scrollableDistance = Math.max(workCarousel.offsetHeight - window.innerHeight, 1);
-    const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
-    targetPosition = progress * (cards.length - 1);
     requestWorkCarouselRender();
   }
 
@@ -193,14 +188,10 @@ if (workCarousel) {
     window.requestAnimationFrame(renderWorkCarousel);
   }
 
-  function scrollToWorkIndex(index, behavior = 'smooth') {
+  function scrollToWorkIndex(index) {
     const nextIndex = Math.min(cards.length - 1, Math.max(0, index));
-    const sectionTop = window.scrollY + workCarousel.getBoundingClientRect().top;
-    const scrollableDistance = Math.max(workCarousel.offsetHeight - window.innerHeight, 1);
-    const progress = cards.length > 1 ? nextIndex / (cards.length - 1) : 0;
     targetPosition = nextIndex;
     requestWorkCarouselRender();
-    window.scrollTo({ top: sectionTop + scrollableDistance * progress, behavior });
   }
 
   function finishCarouselSwipe(event) {

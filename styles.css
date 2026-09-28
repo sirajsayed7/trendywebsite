@@ -319,6 +319,11 @@ body.contact-open{overflow:hidden}
 .drawer-media.is-dual .onestop-logo{top:46%;transform:translateY(-50%)}
 @media(max-width:740px){.drawer-media.is-dual .onestop-logo{top:42%;transform:translateY(-50%)}}
 
+/* Carousel navigation is horizontal-only; vertical scrolling simply passes the section. */
+.work-carousel{height:100svh;min-height:680px}
+.work-carousel-sticky{position:relative;top:auto;height:100%;min-height:680px}
+@media(max-width:740px){.work-carousel{height:100svh;min-height:680px}.work-carousel-sticky{position:relative;top:auto;height:100%;min-height:680px}}
+
 /* Keep the mobile hero composition legible across short and wide phones. */
 @media(max-width:740px){
   .mobile-hero{--hero-canvas:max(100svh,840px);min-height:calc(var(--hero-canvas) + 245px)}
