@@ -317,8 +317,8 @@ const projectData = {
     title: 'Driven by detail.',
     client: 'Denza Qatar',
     services: 'Story · Film · Campaign content',
-    video: '/media/d52bb18e55cc3d9dbb8885b1.mp4',
-    poster: '/assets/rail-corporate-clean-final-v3.png',
+    video: '/media/property-tour-v1.mp4',
+    poster: '/media/property-tour-v1.jpg',
     description: 'Corporate does not have to feel corporate. We translate product, people and purpose into confident films and social content with clarity, pace and character.'
   },
   lifestyle: {
