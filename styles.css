@@ -319,11 +319,6 @@ body.contact-open{overflow:hidden}
 .drawer-media.is-dual .onestop-logo{top:46%;transform:translateY(-50%)}
 @media(max-width:740px){.drawer-media.is-dual .onestop-logo{top:42%;transform:translateY(-50%)}}
 
-/* Carousel navigation is horizontal-only; vertical scrolling simply passes the section. */
-.work-carousel{height:100svh;min-height:680px}
-.work-carousel-sticky{position:relative;top:auto;height:100%;min-height:680px}
-@media(max-width:740px){.work-carousel{height:100svh;min-height:680px}.work-carousel-sticky{position:relative;top:auto;height:100%;min-height:680px}}
-
 /* Keep the mobile hero composition legible across short and wide phones. */
 @media(max-width:740px){
   .mobile-hero{--hero-canvas:max(100svh,840px);min-height:calc(var(--hero-canvas) + 245px)}
@@ -553,3 +548,13 @@ body.contact-open{overflow:hidden}
 /* F&B campaign mark: transparent, high-fidelity vector with deliberate optical sizing. */
 .onestop-logo{left:7%;top:25%;width:clamp(82px,8.4vw,126px);filter:drop-shadow(0 6px 22px rgba(0,0,0,.48))}
 @media(max-width:740px){.onestop-logo{left:6.5%;top:26%;width:58px}}
+
+/* Final responsive interaction overrides. */
+.work-carousel{height:100svh;min-height:680px}
+.work-carousel-sticky{position:relative;top:auto;height:100%;min-height:680px}
+@media(max-width:740px){
+  .work-carousel{height:100svh;min-height:680px}
+  .work-carousel-sticky{position:relative;top:auto;height:100%;min-height:680px}
+  .mobile-hero .hero-copy h1{margin:38px 0 12px;font-size:clamp(50px,13.4vw,60px)}
+  .mobile-hero .hero-actions .button-dark{width:min(232px,100%);min-height:56px;padding:0 18px}
+}
